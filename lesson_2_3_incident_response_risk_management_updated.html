@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الاستجابة للحوادث وإدارة المخاطر | تانية ثانوي</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+:root{--navy:#193b70;--blue:#3478cf;--sky:#eaf5ff;--mint:#dff8ef;--green:#178768;--purple:#7657c8;--lav:#f0ebff;--gold:#ffbd3e;--ink:#183153;--muted:#61728d;--white:#fff;--line:#dbe8f7;--shadow:0 12px 32px #214b7b12}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;color:var(--ink);background:linear-gradient(135deg,#f5f9ff 0%,#f0f7ff 45%,#f7f4ff 100%);line-height:1.8}
+button,input{font:inherit}
+button{cursor:pointer;border:0}
+a{color:inherit;text-decoration:none}
+.topbar{position:sticky;top:0;z-index:20;background:#ffffffdf;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--navy)}
+.brand-icon{display:grid;place-items:center;width:43px;height:43px;background:linear-gradient(135deg,#d8edff,#d9fff0);border-radius:14px;font-size:24px}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}
+.navlinks a{font-size:13px;font-weight:800;color:#425978;padding:8px 11px;border-radius:99px;transition:.2s}
+.navlinks a:hover{background:var(--sky);color:var(--blue)}
+.hero{max-width:1180px;margin:24px auto 20px;padding:clamp(24px,5vw,56px);border-radius:30px;position:relative;overflow:hidden;background:linear-gradient(120deg,#c7e9ff,#e3f2ff 55%,#e8e0ff);box-shadow:var(--shadow);display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:20px}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:#fff7;width:260px;height:260px;animation:float 8s ease-in-out infinite}
+.hero:before{left:-90px;top:-120px}.hero:after{right:40%;bottom:-210px;width:330px;height:330px;animation-delay:-3s}
+.hero-content,.hero-art{position:relative;z-index:1}
+.eyebrow{display:inline-block;background:#fff9;padding:6px 13px;border-radius:99px;color:#285a98;font-size:13px;font-weight:900}
+h1{font-size:clamp(28px,4vw,46px);line-height:1.35;color:#12356d;margin:15px 0 10px}
+.hero p{font-size:17px;color:#345478;max-width:600px;margin:0 0 22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 19px;border-radius:14px;font-weight:900;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 9px 20px #244b7b20}
+.btn-primary{background:linear-gradient(135deg,#ffce56,#ffae27);color:#543700;box-shadow:0 6px 0 #e69a20}
+.btn-blue{background:var(--blue);color:#fff}.btn-ghost{background:#eef5ff;color:#28568f}
+.hero-art{font-size:clamp(85px,12vw,150px);text-align:center;filter:drop-shadow(0 12px 12px #235e8830);animation:float 4s ease-in-out infinite}
+.hero-art small{display:block;font-size:16px;font-weight:800;color:#2d6197}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 50px}
+.section{margin:26px 0;scroll-margin-top:90px}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:15px}
+.kicker{color:var(--purple);font-size:12px;font-weight:900;letter-spacing:.5px}
+h2{font-size:clamp(22px,3vw,30px);line-height:1.4;margin:3px 0;color:var(--navy)}
+.sub{color:var(--muted);margin:0;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.card{background:#ffffffd9;border:1px solid var(--line);border-radius:22px;padding:21px;box-shadow:var(--shadow);transition:transform .25s,border-color .25s;animation:fadeUp .65s both}
+.card:hover{transform:translateY(-4px);border-color:#b8d8fa}
+.card-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:17px;background:var(--sky);font-size:27px;margin-bottom:10px}
+.card h3{margin:0 0 6px;font-size:18px;color:#204878}
+.card p{margin:0;color:#526780;font-size:14px}
+.tag{display:inline-block;font-size:12px;font-weight:900;padding:3px 10px;border-radius:99px;background:var(--lav);color:var(--purple);margin-top:12px}
+.blue{background:#e6f3ff}.green{background:#e2fbf1}.purple{background:#f0eaff}.yellow{background:#fff4d8}.pink{background:#ffedf3}
+.callout{margin-top:15px;padding:15px 18px;border-radius:17px;background:#fff7df;border:1px solid #ffe5a2;color:#765416;font-weight:700}
+.callout strong{color:#5b3f00}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step{position:relative;border-radius:20px;background:#fff;border:1px solid var(--line);padding:18px;overflow:hidden;transition:.2s}
+.step:hover{transform:scale(1.015);box-shadow:var(--shadow)}
+.step-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.number{flex-shrink:0;width:40px;height:40px;display:grid;place-items:center;border-radius:13px;background:var(--blue);color:white;font-weight:900;font-size:18px}
+.step:nth-child(3n+2) .number{background:var(--green)}.step:nth-child(3n) .number{background:var(--purple)}
+.step h3{margin:0;color:#244979;font-size:17px}.step p{margin:0;font-size:13px;color:#5c6e86}
+.step .daily{margin-top:10px;background:#f2f7ff;padding:9px 11px;border-radius:12px;font-size:12px;color:#405e83}
+.flowline{display:flex;justify-content:center;align-items:center;gap:8px;margin:13px;color:#5e80b2;font-weight:900}
+.interactive-panel{background:linear-gradient(135deg,#eaf5ff,#f5f0ff);border:1px solid #d8e5fb;border-radius:24px;padding:22px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.tab{padding:9px 15px;border-radius:12px;background:#fff;color:#536783;font-weight:800;border:1px solid #dbe6f5}
+.tab.active{background:var(--navy);color:white}
+.tabcontent{display:none}.tabcontent.active{display:block;animation:fadeIn .35s}
+.case-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:18px;align-items:start}
+.case-visual{background:#fff;border-radius:18px;padding:22px;text-align:center;font-size:62px;border:1px solid var(--line)}
+.case-visual strong{display:block;font-size:17px;color:#254c7e}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{margin:9px 0;padding:10px 13px;background:#fff;border-radius:12px;font-size:14px}
+.checklist li::before{content:"✓";color:var(--green);font-weight:900;margin-left:9px}
+.riskbox{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rangebox{background:white;border:1px solid var(--line);padding:17px;border-radius:18px}
+.rangebox label{display:flex;justify-content:space-between;font-weight:900;color:#2b4d7a}
+input[type=range]{width:100%;accent-color:var(--purple);margin:14px 0}
+.score{margin-top:16px;border-radius:18px;padding:18px;text-align:center;background:#fff;border:1px solid var(--line)}
+.score-number{font-size:44px;line-height:1.3;font-weight:900;color:var(--purple)}
+.score-level{display:inline-block;padding:4px 13px;border-radius:99px;background:#fff0c7;color:#7a5100;font-weight:900}
+.mini-note{font-size:12px;color:var(--muted)}
+.quiz{background:white;border:1px solid var(--line);border-radius:20px;padding:20px;margin:14px 0;box-shadow:0 5px 18px #1d4d7a08}
+.quiz h3{font-size:17px;margin:0 0 12px;color:#224878}
+.options{display:grid;gap:8px}
+.option{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border:1px solid #dce7f4;border-radius:12px;background:#fbfdff;text-align:right;transition:.2s;color:#344d6d}
+.option:hover{border-color:#91bff0;background:#f2f8ff}
+.option input{margin-top:7px;accent-color:var(--blue)}
+.option.correct{border-color:#45b98f;background:#e8fbf3;color:#176a4c}
+.option.wrong{border-color:#f08c92;background:#fff0f1;color:#a13b42}
+.feedback{display:none;margin-top:10px;padding:10px 13px;border-radius:12px;font-weight:800;font-size:13px}
+.feedback.show{display:block;animation:fadeIn .25s}
+.feedback.ok{background:#e5f9ef;color:#18704e}.feedback.no{background:#fff0ef;color:#a13b42}
+.quiz-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0}
+.result{display:none;background:#e7f8ef;border:1px solid #b7ecd0;padding:17px;border-radius:16px;font-weight:900;color:#176b4c}
+.flashcards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.flash{min-height:150px;perspective:900px;cursor:pointer}
+.flash-inner{position:relative;min-height:150px;transform-style:preserve-3d;transition:transform .6s}
+.flash.flipped .flash-inner{transform:rotateY(180deg)}
+.flash-face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:18px;background:#fff;padding:20px;display:grid;place-items:center;text-align:center;box-shadow:var(--shadow)}
+.flash-face.front{font-weight:900;color:#2a5182;font-size:17px}.flash-face.back{transform:rotateY(180deg);background:#eaf8f3;color:#1d674f;font-size:14px}
+footer{padding:30px 20px;text-align:center;background:#e8f2ff;color:#426187;font-weight:800}
+.progress-shell{height:7px;background:#e0eaf7;border-radius:99px;overflow:hidden;margin-top:8px}
+.progress{height:100%;width:0;background:linear-gradient(90deg,#40c99c,#5687f0);transition:width .5s}
+.to-top{position:fixed;bottom:18px;left:18px;width:43px;height:43px;border-radius:50%;background:var(--navy);color:#fff;box-shadow:var(--shadow);display:none;z-index:10}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}.reveal.visible{opacity:1;transform:none}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(max-width:850px){.hero{grid-template-columns:1fr;text-align:center}.hero-art{order:-1;font-size:90px}.grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start}.navlinks{justify-content:flex-start}.case-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.nav{display:block}.brand{margin-bottom:8px}.navlinks{gap:4px}.navlinks a{font-size:11px;padding:6px 8px}.hero{margin:14px 12px;border-radius:22px;padding:24px 18px}.wrap{padding:0 12px 35px}.grid,.steps,.riskbox,.flashcards{grid-template-columns:1fr}.section-head{display:block}.card{padding:18px}.interactive-panel{padding:14px}.hero p{font-size:15px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <nav class="nav">
+  <a class="brand" href="#home"><span class="brand-icon">🛡️</span><span>البرمجة مع م جلال الأعصر<small style="display:block;font-size:11px;color:#6b7e98">البرمجة والذكاء الاصطناعي • تانية ثانوي</small></span></a>
+  <div class="navlinks"><a href="#warmup">موقف تمهيدي</a><a href="#lesson">محتوى الدرس</a><a href="#textbook">تعريفات الكتاب</a><a href="#stages">مراحل الاستجابة</a><a href="#risk">إدارة المخاطر</a><a href="#priorityExample">مثال ترتيب الأولويات</a><a href="#riskPractice">تدريبات المخاطر</a><a href="#quiz">الاختبار الشامل</a></div>
+ </nav>
+</header>
+<main id="home">
+<section class="hero">
+ <div class="hero-content">
+  <span class="eyebrow">📘 الدرس 2-3 • الوحدة الثانية</span>
+  <h1>الاستجابة للحوادث<br>وإدارة المخاطر</h1>
+  <p>هنفهم إزاي نتصرف لما تحصل مشكلة أمنية، وإزاي نحدد المخاطر اللي لازم نهتم بيها الأول — بأمثلة من المدرسة وحياتنا اليومية.</p>
+  <a class="btn btn-primary" href="#lesson">يلا نبدأ التعلّم <span>←</span></a>
+  <div style="margin-top:18px;font-size:12px;color:#41658f;font-weight:800">⏱️ 15–20 دقيقة • شرح + أمثلة + اختبار تفاعلي</div>
+ </div>
+ <div class="hero-art" aria-label="درع حماية"><span>🧑‍💻 🛡️</span><small>فكّر • استعد • تصرّف بأمان</small></div>
+</section>
+
+<div class="wrap">
+<section class="section reveal" id="warmup">
+ <div class="section-head"><div><div class="kicker">قبل ما نبدأ / فكّر في الموقف</div><h2>تخيّل إنك مسؤول عن معمل الكمبيوتر في المدرسة!</h2><p class="sub">ده موقف تمهيدي يساعدك تفكر قبل ما نتعلم أسماء المراحل.</p></div></div>
+ <div class="interactive-panel">
+  <div class="case-grid">
+   <div class="case-visual">🏫 💻 🚨<strong>موقف مفاجئ</strong><small style="font-size:12px;color:#6a7c91">أجهزة المعمل بدأت تعرض رسائل غريبة، وملفات بعض الأجهزة مش بتفتح.</small></div>
+   <div>
+    <h3>لو كنت مكان المسؤول، هتعمل إيه؟</h3>
+    <p>فكّر في الأسئلة دي:</p>
+    <ul class="checklist"><li>إزاي كنت تستعد للمشكلة قبل ما تحصل؟</li><li>إزاي تتأكد إن ده حادث أمني فعلًا؟</li><li>إيه أول تصرف يمنع المشكلة من الانتشار لباقي الأجهزة؟</li><li>بعد السيطرة على المشكلة، إزاي ترجع الأجهزة للعمل وتمنع تكرارها؟</li></ul>
+    <button class="btn btn-blue" type="button" id="warmupReveal" aria-expanded="false">اعرض طريقة التفكير المقترحة</button>
+    <div id="warmupAnswer" class="callout" hidden><strong>خلّي تفكيرك بالترتيب:</strong> قبل الحادث نجهّز خطة ونسخًا احتياطية ونحدد المسؤوليات؛ عند ظهور العلامات نكتشف الحادث ونجمع المعلومات؛ ثم نعزل الأجهزة المصابة لمنع الانتشار، ونزيل البرمجية الخبيثة ونسد الثغرة، وبعد التأكد من الأمان نستعيد الملفات والخدمات، وأخيرًا نراجع ما حدث ونحسّن الحماية. دي هي فكرة مراحل الاستجابة الست اللي هنتعلمها.</div>
+   </div>
+  </div>
+ </div>
+</section>
+<section class="section reveal" id="lesson">
+ <div class="section-head"><div><div class="kicker">01 / نفهم الأساس</div><h2>يعني إيه حادث أمني؟</h2><p class="sub">أي حدث بيأثر على أمان المعلومات أو بيهدده بشكل جدي.</p></div></div>
+ <div class="grid">
+  <article class="card blue"><div class="card-icon">👁️</div><h3>سرية المعلومات</h3><p>المعلومات مايشوفهاش غير الأشخاص المصرّح لهم. مثال: طالب يشوف درجات طالب تاني من غير إذن.</p><span class="tag">مثال يومي: خصوصية الرسائل</span></article>
+  <article class="card green"><div class="card-icon">🧩</div><h3>سلامة المعلومات</h3><p>البيانات تفضل صحيحة ومايتمش تعديلها بدون تصريح. مثال: تغيير درجة طالب من غير إذن.</p><span class="tag">مثال يومي: ملف درجات صحيح</span></article>
+  <article class="card purple"><div class="card-icon">⚡</div><h3>توافر المعلومات</h3><p>المعلومات والخدمات تكون متاحة وقت ما نحتاجها. مثال: موقع المدرسة يتعطل وقت ظهور النتيجة.</p><span class="tag">مثال يومي: الموقع يفتح وقت الحاجة</span></article>
+ </div>
+ <div class="callout">💡 <strong>افتكر:</strong> تسريب بيانات، أو تعديلها بدون تصريح، أو تعطّل خدمة بسبب هجوم — كلها أمثلة ممكن تعتبر حوادث أمنية. إنما تحديث عادي بيضيف مميزات جديدة مش بالضرورة حادث أمني.</div>
+</section>
+
+<section class="section reveal" id="textbook">
+ <div class="section-head"><div><div class="kicker">من كتاب المدرسة • مصطلحات وأمثلة</div><h2>التعريفات الأساسية وأمثلة الكتاب</h2><p class="sub">راجع المصطلح، افهم معناه، ثم اربطه بالمثال. صيغ التعريفات التالية مبنية على محتوى الدرس في الكتاب.</p></div></div>
+ <div class="grid">
+  <article class="card blue"><div class="card-icon">🚨</div><h3>الحادث الأمني</h3><p>حدث يؤثر في سرية المعلومات أو سلامتها أو توافرها، أو يهددها بجدية، أو يخالف سياسة أمنية.</p><div class="daily"><strong>أمثلة الكتاب:</strong> تشفير البيانات بسبب برنامج فدية، أو تسرب معلومات العملاء بسبب وصول غير مصرح به، أو توقف خدمة ويب بسبب هجوم على الخادم.</div></article>
+  <article class="card yellow"><div class="card-icon">⚠️</div><h3>الخطر</h3><p>احتمال وقوع حدث يسبب ضررًا، مع مراعاة احتمال وقوعه وحجم أثره.</p><div class="daily"><strong>مثال الكتاب:</strong> احتمال تعرض نظام سجلات المدرسة لهجوم فدية آخر.</div></article>
+  <article class="card green"><div class="card-icon">💥</div><h3>التأثير</h3><p>مقدار الضرر إذا وقعت المخاطرة.</p><div class="daily"><strong>مثال توضيحي:</strong> هجوم يمنع الموظفين من الوصول إلى سجلات الطلاب قد يكون تأثيره كبيرًا.</div></article>
+  <article class="card purple"><div class="card-icon">🎲</div><h3>الاحتمالية</h3><p>مدى احتمالية وقوع المخاطرة.</p><div class="daily"><strong>مثال توضيحي:</strong> تقدير مدى احتمال حدوث انقطاع كهرباء قصير في المدرسة.</div></article>
+  <article class="card blue"><div class="card-icon">🧱</div><h3>الاحتواء</h3><p>الحد من انتشار الضرر.</p><div class="daily"><strong>مثال الكتاب:</strong> فصل حاسوب مصاب ببرمجية خبيثة عن الشبكة.</div></article>
+  <article class="card pink"><div class="card-icon">🧹</div><h3>الاستئصال / إزالة التهديد</h3><p>إزالة السبب الذي أدى إلى الحادث.</p><div class="daily"><strong>مثال الكتاب:</strong> إزالة إصابة البرمجيات الخبيثة ومعالجة سببها.</div></article>
+ </div>
+ <div class="callout"><strong>تمييز مهم في أسئلة الكتاب:</strong> تحديث برنامج لإضافة ميزات جديدة ليس مثالًا مناسبًا بحد ذاته على حادث أمني؛ أما تعطل خدمة ويب بسبب هجوم على الخادم فهو حادث أمني.</div>
+ <article class="quiz" style="margin-top:14px"><h3>مراجعة محلولة من نمط الكتاب</h3><p><strong>1)</strong> «يمكن تحديد حجم المخاطرة بالتأثير وحده» — <span style="color:#b42318;font-weight:900">خطأ</span>؛ لأننا نستخدم التأثير والاحتمالية معًا.</p><p><strong>2)</strong> «من المهم منع انتشار الضرر قبل إزالة السبب» — <span style="color:#16784a;font-weight:900">صحيح</span>؛ الاحتواء يسبق الاستئصال في التسلسل العام.</p><p><strong>3)</strong> «المرحلة الأخيرة هي الدروس المستفادة والتحسين» — <span style="color:#16784a;font-weight:900">صحيح</span>.</p></article>
+</section>
+
+<section class="section reveal" id="stages">
+ <div class="section-head"><div><div class="kicker">02 / خطة التعامل</div><h2>مراحل الاستجابة للحوادث الست</h2><p class="sub">تخيّل إن موقع المدرسة اتعرض لهجوم. هنمشي بخطوات منظمة بدل الارتباك.</p></div></div>
+ <div class="steps">
+  <article class="step"><div class="step-top"><span class="number">1</span><h3>التحضير</h3></div><p>نجهّز الأدوات والخطة والمسؤوليات والنسخ الاحتياطية قبل وقوع المشكلة.</p><div class="daily">🏠 من الحياة: نجهّز شنطة الإسعافات قبل ما نحتاجها.</div><div class="daily"><strong>🔑 كلمات مفتاحية:</strong> خطة • أدوات • مسؤوليات • نسخ احتياطية</div></article>
+  <article class="step"><div class="step-top"><span class="number">2</span><h3>الاكتشاف</h3></div><p>نلاحظ العلامات ونتأكد إن فيه حادث، ونجمع معلومات تساعدنا نفهمه.</p><div class="daily">🚨 من الحياة: نسمع إنذار الحريق ونتأكد من مصدره.</div><div class="daily"><strong>🔑 كلمات مفتاحية:</strong> ملاحظة • اكتشاف • تأكيد • جمع معلومات</div></article>
+  <article class="step"><div class="step-top"><span class="number">3</span><h3>الاحتواء</h3></div><p>نعزل الجزء المتأثر أو نقيّد تأثيره عشان المشكلة ما تنتشرش.</p><div class="daily">🚪 من الحياة: نقفل فصل فيه مشكلة مؤقتًا عشان ما تنتقلش لباقي الفصول.</div><div class="daily"><strong>🔑 كلمات مفتاحية:</strong> عزل • تقييد الوصول • منع الانتشار</div></article>
+  <article class="step"><div class="step-top"><span class="number">4</span><h3>إزالة التهديد</h3></div><p>نزيل البرنامج الخبيث ونعالج الثغرة اللي اتستغلت، مش مجرد نخفي الأعراض.</p><div class="daily">🧹 من الحياة: نشيل سبب المشكلة وننضّف المكان بعد احتواء الضرر.</div><div class="daily"><strong>🔑 كلمات مفتاحية:</strong> حذف البرمجية الخبيثة • سد الثغرة • إزالة السبب</div></article>
+  <article class="step"><div class="step-top"><span class="number">5</span><h3>الاستعادة</h3></div><p>نرجّع الأنظمة والخدمات للعمل الآمن، وممكن نستعيد البيانات من نسخة سليمة.</p><div class="daily">🔧 من الحياة: نصلّح الجهاز ونتأكد إنه اشتغل بشكل طبيعي.</div><div class="daily"><strong>🔑 كلمات مفتاحية:</strong> استرجاع النسخ • تشغيل آمن • اختبار النظام</div></article>
+  <article class="step"><div class="step-top"><span class="number">6</span><h3>الدروس المستفادة والتحسين</h3></div><p>نراجع اللي حصل، نوثّق الدروس، ونحسّن الحماية لتقليل تكرار الحادث.</p><div class="daily">📝 من الحياة: بعد موقف صعب، نعرف سبب الخطأ ونحط قواعد تمنع تكراره.</div><div class="daily"><strong>🔑 كلمات مفتاحية:</strong> توثيق • مراجعة • تحسين الحماية • منع التكرار</div></article>
+ </div>
+ <div class="flowline">التحضير ← الاكتشاف ← الاحتواء ← إزالة التهديد ← الاستعادة ← التعلّم والتحسين</div>
+ <div class="callout">📌 مهم: المراحل دي نموذج عام. ساعات بنرجع لمرحلة سابقة؛ مثلًا لو اكتشفنا إن التهديد لسه موجود أثناء الاستعادة، لازم نرجع نحتويه ونزيله الأول.</div>
+</section>
+
+<section class="section reveal" id="cases">
+ <div class="section-head"><div><div class="kicker">03 / نطبّق على مواقف</div><h2>حالات من المدرسة والمتجر الإلكتروني</h2><p class="sub">اختار الحالة وشوف التصرف المنطقي خطوة بخطوة.</p></div></div>
+ <div class="interactive-panel">
+  <div class="tabs">
+   <button class="tab active" data-tab="school">🏫 المدرسة</button>
+   <button class="tab" data-tab="shop">🛒 المتجر الإلكتروني</button>
+   <button class="tab" data-tab="dailycase">📱 موقف يومي</button>
+  </div>
+  <div class="tabcontent active" id="school">
+   <div class="case-grid"><div class="case-visual">🏫 🔒<strong>هجوم ببرنامج فدية</strong><small style="font-size:12px;color:#6a7c91">الملفات اتشفرت والموظفين مش قادرين يفتحوها</small></div>
+   <div><h3>نعمل إيه؟</h3><ul class="checklist"><li><strong>التحضير قبل الحادث:</strong> تجهيز خطة استجابة، وتحديد المسؤوليات، والاحتفاظ بنسخ احتياطية سليمة وتحديث وسائل الحماية.</li><li><strong>الاكتشاف:</strong> تحديد الأجهزة والملفات المتأثرة والتأكد من وجود حادث.</li><li>احتواء المشكلة بعزل الأجهزة المصابة عن الشبكة.</li><li>إزالة البرنامج الخبيث ومعالجة سبب الاختراق.</li><li>استعادة البيانات من نسخة احتياطية سليمة بعد التأكد من أمان النظام.</li><li>مراجعة الحادث وتحديث الحماية وتوعية الموظفين.</li></ul></div></div>
+  </div>
+  <div class="tabcontent" id="shop">
+   <div class="case-grid"><div class="case-visual">🛍️ 🛡️<strong>تسريب بيانات العملاء</strong><small style="font-size:12px;color:#6a7c91">المتجر اكتشف وصول غير مصرح به لبيانات</small></div>
+   <div><h3>ترتيب تصرفات مناسب</h3><ul class="checklist"><li><strong>التحضير قبل الحادث:</strong> تحديد المسؤول عن الاستجابة، وتجهيز نسخ احتياطية وخطة للتعامل مع التسريب، وتطبيق ضوابط الوصول للبيانات.</li><li><strong>الاكتشاف:</strong> تأكيد الحادث وتحديد نوع البيانات المتأثرة ونطاق التسريب.</li><li>احتواء التسريب بتقييد الوصول أو عزل الجزء المتأثر.</li><li>إزالة سبب الاختراق وسد الثغرة وتغيير بيانات الدخول المتأثرة.</li><li>استعادة الخدمة بأمان والتحقق من سلامة الأنظمة.</li><li>توثيق الحادث وتحسين الضوابط ومراجعة الصلاحيات.</li></ul></div></div>
+  </div>
+  <div class="tabcontent" id="dailycase">
+   <div class="case-grid"><div class="case-visual">📱 🔔<strong>رسالة تسجيل دخول غريبة</strong><small style="font-size:12px;color:#6a7c91">وصلك تنبيه بمحاولة دخول مش بتاعتك</small></div>
+   <div><h3>تصرّف آمن</h3><ul class="checklist"><li><strong>التحضير قبل الحادث:</strong> استخدام كلمة مرور قوية، وتفعيل المصادقة متعددة العوامل، وتحديث التطبيق باستمرار.</li><li><strong>عند وصول الرسالة:</strong> ما تضغطش على روابط مشبوهة في الرسالة.</li><li>افتح التطبيق أو الموقع من مصدره الرسمي وتحقق من النشاط.</li><li>غيّر كلمة المرور لو فيه احتمال إنها اتكشفت.</li><li>فعّل المصادقة متعددة العوامل وسجّل الخروج من الجلسات الغريبة.</li><li>بلّغ الدعم لو تأكدت من وجود دخول غير مصرح به.</li></ul></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="section reveal" id="risk">
+ <div class="section-head"><div><div class="kicker">04 / نحدّد الأولويات</div><h2>إدارة المخاطر: نهتم بإيه الأول؟</h2><p class="sub">الخطر بيتحدد من عاملين: التأثير والاحتمالية.</p></div></div>
+ <div class="grid" style="margin-bottom:15px">
+  <article class="card yellow"><div class="card-icon">💥</div><h3>التأثير</h3><p>حجم الضرر المتوقع لو الحدث حصل. هل هيعطل خدمة مهمة؟ هل هيكشف بيانات حساسة؟</p></article>
+  <article class="card blue"><div class="card-icon">🎲</div><h3>الاحتمالية</h3><p>قد إيه متوقع إن الحدث يحصل، بناءً على المعلومات والظروف المتاحة.</p></article>
+  <article class="card purple"><div class="card-icon">🧮</div><h3>درجة الخطر</h3><p>بنستخدم نموذج مبسط: درجة الخطر = درجة التأثير × درجة الاحتمالية.</p></article>
+ </div>
+ <div class="interactive-panel">
+  <h3 style="margin-top:0">🧮 جرّب حاسبة المخاطر</h3>
+  <p class="sub">حرّك المؤشرين. الدرجات من 1 إلى 3 هنا للتدريب فقط، مش مقياس رسمي ثابت في المنهج.</p>
+  <div class="riskbox">
+   <div class="rangebox"><label for="impact">التأثير <span id="impactVal">3</span></label><input id="impact" type="range" min="1" max="3" value="3" step="1"><div class="mini-note">1 = بسيط • 2 = متوسط • 3 = عالي</div></div>
+   <div class="rangebox"><label for="likelihood">الاحتمالية <span id="likelihoodVal">3</span></label><input id="likelihood" type="range" min="1" max="3" value="3" step="1"><div class="mini-note">1 = قليلة • 2 = متوسطة • 3 = عالية</div></div>
+  </div>
+  <div class="score"><div class="mini-note">درجة الخطر = التأثير × الاحتمالية</div><div class="score-number" id="score">9</div><span class="score-level" id="level">أولوية عالية</span><p id="scoreExplain">تأثير عالي واحتمالية عالية: محتاجين نبدأ بمعالجته بسرعة.</p></div>
+ </div>
+ <div class="callout">🎯 قاعدة مهمة في الامتحان: الخطر ذو التأثير العالي والاحتمالية العالية عادةً بيكون أعلى أولوية. لكن ترتيب المخاطر كمان بيتأثر بالسياق والضوابط الموجودة.</div>
+  <div class="callout" style="background:#eef5ff;border-color:#cfe2fb;color:#294d7b">⚖️ <strong>لو درجتا خطر متساويتان، هل نتعامل معهما بنفس الطريقة؟</strong><br>مش بالضرورة. قارن حجم الضرر، وأهمية النظام، وحساسية البيانات، والضوابط المتاحة. ولو اتضح إن المخاطر متساوية فعلًا، سجّلها بنفس الأولوية، ثم حدّد توقيت وطريقة التعامل حسب الموارد والسياق.</div>
+  <section class="section" id="priorityExample" style="margin-top:22px">
+   <div class="section-head"><div><div class="kicker">مثال كامل محلول</div><h2>رتّب مخاطر المدرسة حسب الأولوية</h2><p class="sub">نفس فكرة الكتاب: قيّم التأثير والاحتمالية، ثم استخدم مصفوفة المخاطر. التقديرات أدناه افتراضية للتدريب وليست أرقامًا ثابتة في الكتاب.</p></div></div>
+   <div class="callout">طريقة الحل: <strong>1)</strong> حدّد التأثير (حجم الضرر). <strong>2)</strong> حدّد الاحتمالية (مدى احتمال الحدوث). <strong>3)</strong> طابق الاثنين في المصفوفة. <strong>4)</strong> ابدأ بالمخاطر الأعلى أولوية، مع مراعاة أهمية النظام والضوابط الموجودة.</div>
+   <h3 style="margin-top:18px">مصفوفة تقييم المخاطر كما في فكرة الكتاب</h3>
+   <p class="sub">اقرأ الصف حسب الاحتمالية، والعمود حسب التأثير. الخلايا توضّح مستوى الخطر، وليست درجات رقمية.</p>
+   <div style="overflow-x:auto;margin-top:10px"><table style="width:100%;border-collapse:collapse;min-width:440px;text-align:center;background:#fff;border-radius:14px;overflow:hidden"><thead><tr style="background:#eaf1fb"><th style="padding:11px">الاحتمالية ↓ / التأثير →</th><th style="padding:11px">منخفض</th><th style="padding:11px">متوسط</th><th style="padding:11px">عالٍ</th></tr></thead><tbody>
+   <tr><th style="padding:11px;background:#f7f9fc">عالية</th><td style="padding:12px;background:#dce8e4">متوسط</td><td style="padding:12px;background:#b6c8c3">مرتفع</td><td style="padding:12px;background:#344b48;color:#fff;font-weight:900">مرتفع جدًا</td></tr>
+   <tr><th style="padding:11px;background:#f7f9fc">متوسطة</th><td style="padding:12px;background:#e4e1e8">منخفض</td><td style="padding:12px;background:#dce8e4">متوسط</td><td style="padding:12px;background:#b6c8c3">مرتفع</td></tr>
+   <tr><th style="padding:11px;background:#f7f9fc">منخفضة</th><td style="padding:12px;background:#f0edf3">منخفض جدًا</td><td style="padding:12px;background:#e4e1e8">منخفض</td><td style="padding:12px;background:#dce8e4">متوسط</td></tr>
+   </tbody></table></div>
+   <p class="sub" style="margin-top:14px">اقرأ المواقف وحدّد نتيجة كل واحد بنفسك. نتيجة المصفوفة والأولوية مخفيتان حتى تضغط على زر إظهار الحل.</p>
+   <div style="overflow-x:auto;margin-top:12px"><table style="width:100%;border-collapse:collapse;min-width:620px;background:#fff;border-radius:14px;overflow:hidden"><thead><tr style="background:#eaf1fb"><th style="padding:12px;text-align:right">الموقف</th><th style="padding:12px">التأثير</th><th style="padding:12px">الاحتمالية</th><th style="padding:12px">نتيجة المصفوفة</th><th style="padding:12px">الأولوية</th></tr></thead><tbody>
+    <tr><td style="padding:11px;border-bottom:1px solid #e6ebf2">أ — هجوم فدية على سجلات الطلاب</td><td style="text-align:center;border-bottom:1px solid #e6ebf2">عالٍ</td><td style="text-align:center;border-bottom:1px solid #e6ebf2">عالية</td><td class="risk-answer" style="text-align:center;border-bottom:1px solid #e6ebf2" data-answer="مرتفع جدًا">؟؟؟</td><td class="risk-answer" style="text-align:center;border-bottom:1px solid #e6ebf2;font-weight:900;color:#b42318" data-answer="1">؟؟؟</td></tr>
+    <tr><td style="padding:11px;border-bottom:1px solid #e6ebf2">ب — تسرب بيانات الطلاب بسبب وصول غير مصرح به</td><td style="text-align:center;border-bottom:1px solid #e6ebf2">عالٍ</td><td style="text-align:center;border-bottom:1px solid #e6ebf2">متوسطة</td><td class="risk-answer" style="text-align:center;border-bottom:1px solid #e6ebf2" data-answer="مرتفع">؟؟؟</td><td class="risk-answer" style="text-align:center;border-bottom:1px solid #e6ebf2;font-weight:900;color:#c15d13" data-answer="2">؟؟؟</td></tr>
+    <tr><td style="padding:11px;border-bottom:1px solid #e6ebf2">ج — انقطاع كهرباء قصير مع وجود خطة استعادة</td><td style="text-align:center;border-bottom:1px solid #e6ebf2">منخفض</td><td style="text-align:center;border-bottom:1px solid #e6ebf2">عالية</td><td class="risk-answer" style="text-align:center;border-bottom:1px solid #e6ebf2" data-answer="متوسط">؟؟؟</td><td class="risk-answer" style="text-align:center;border-bottom:1px solid #e6ebf2;font-weight:900" data-answer="3 (مشتركة)">؟؟؟</td></tr>
+    <tr><td style="padding:11px;border-bottom:1px solid #e6ebf2">د — كلمة مرور ضعيفة لحساب غير حساس</td><td style="text-align:center;border-bottom:1px solid #e6ebf2">متوسط</td><td style="text-align:center;border-bottom:1px solid #e6ebf2">متوسطة</td><td class="risk-answer" style="text-align:center;border-bottom:1px solid #e6ebf2" data-answer="متوسط">؟؟؟</td><td class="risk-answer" style="text-align:center;border-bottom:1px solid #e6ebf2;font-weight:900" data-answer="3 (مشتركة)">؟؟؟</td></tr>
+    <tr><td style="padding:11px">هـ — تعطل طابعة غير أساسية لفترة قصيرة</td><td style="text-align:center">منخفض</td><td style="text-align:center">منخفضة</td><td class="risk-answer" style="text-align:center" data-answer="منخفض جدًا">؟؟؟</td><td class="risk-answer" style="text-align:center;font-weight:900" data-answer="4">؟؟؟</td></tr>
+   </tbody></table></div>
+   <button class="btn btn-blue" type="button" id="showRiskAnswers" aria-expanded="false" onclick="(function(b){const cells=document.querySelectorAll('.risk-answer');const show=b.getAttribute('aria-expanded')!=='true';cells.forEach(c=>{c.textContent=show?c.dataset.answer:'؟؟؟';c.style.background=show?'#f0f7f4':'transparent';c.style.fontWeight=show?'800':c.style.fontWeight});b.textContent=show?'إخفاء نتيجة المصفوفة والأولويات':'إظهار نتيجة المصفوفة والأولويات';b.setAttribute('aria-expanded',String(show));})(this)" style="margin-top:12px">إظهار نتيجة المصفوفة والأولويات</button>
+   <div class="callout" style="margin-top:12px"><strong>ليه الترتيب ده؟</strong> هجوم الفدية يجمع بين ضرر كبير واحتمالية مرتفعة، لذلك يتصدر الأولوية. تسرب البيانات ضرره كبير لكن احتماليته في هذا المثال متوسطة. أما انقطاع الكهرباء فاحتماليته عالية لكن تأثيره أقل بسبب وجود خطة استعادة. الموقفان (ج) و(د) في فئة «متوسط» في هذه المصفوفة، لذلك لا نفرض ترتيبًا قطعيًا بينهما دون معلومات إضافية؛ نراجع السياق والضوابط وأهمية النظام. وقد يتغير الترتيب إذا تغيّرت التقديرات.</div>
+   <article class="quiz" style="margin-top:14px"><h3>دورك: جرّب ترتّب موقفين</h3><p>موقف (و): التأثير عالٍ والاحتمالية منخفضة. موقف (ز): التأثير منخفض والاحتمالية متوسطة. أيهما تعطيه أولوية أعلى في مصفوفة الكتاب؟</p><div class="options"><label class="option"><input type="radio" name="priorityCompare" value="w"><span>موقف (و): تأثير عالٍ واحتمالية منخفضة</span></label><label class="option"><input type="radio" name="priorityCompare" value="z"><span>موقف (ز): تأثير منخفض واحتمالية متوسطة</span></label><label class="option"><input type="radio" name="priorityCompare" value="context"><span>لا أستطيع الجزم دون النظر للمصفوفة والسياق والضوابط</span></label></div><button class="btn btn-blue" type="button" onclick="(function(){const x=document.querySelector('input[name=priorityCompare]:checked');const f=document.getElementById('priorityCompareFb');f.className='feedback show '+(x&&x.value==='w'?'ok':'no');f.textContent='في مصفوفة الكتاب المبسطة، (و) تأثير عالٍ واحتمالية منخفضة = متوسط، بينما (ز) تأثير منخفض واحتمالية متوسطة = منخفض؛ لذلك (و) أعلى أولوية في هذا المثال. ومع ذلك راجع السياق والضوابط المتاحة.';})()">إظهار الحل والتفسير</button><div class="feedback" id="priorityCompareFb"></div></article>
+  </section>
+  <section class="section" id="riskPractice" style="margin-top:22px">
+   <div class="section-head"><div><div class="kicker">تدريب تفاعلي</div><h2>احسب الخطر وحدّد الأولوية</h2><p class="sub">اختار الإجابة ثم اضغط «إظهار الإجابة» للمراجعة.</p></div></div>
+   <article class="quiz">
+    <h3>التدريب 1: خطر (أ) تأثيره 3 واحتماليته 2. ما درجة الخطر؟</h3>
+    <div class="options">
+     <label class="option"><input type="radio" name="riskQ1" value="4"><span>4</span></label>
+     <label class="option"><input type="radio" name="riskQ1" value="5"><span>5</span></label>
+     <label class="option"><input type="radio" name="riskQ1" value="6"><span>6</span></label>
+    </div>
+    <button class="btn btn-blue" type="button" onclick="revealRiskAnswer('riskFb1','riskQ1','6','الإجابة: 3 × 2 = 6. وبحسب النموذج التدريبي في الدرس، تُعد أولوية عالية.')">إظهار الإجابة</button>
+    <div class="feedback" id="riskFb1"></div>
+   </article>
+   <article class="quiz">
+    <h3>التدريب 2: خطران درجتهما 6. هل يجب أن يكون التصرف معهما واحدًا؟</h3>
+    <div class="options">
+     <label class="option"><input type="radio" name="riskQ2" value="yes"><span>نعم، لأن الدرجة متساوية دائمًا.</span></label>
+     <label class="option"><input type="radio" name="riskQ2" value="no"><span>لا، نقارن الضرر وأهمية النظام وحساسية البيانات والضوابط المتاحة.</span></label>
+    </div>
+    <button class="btn btn-blue" type="button" onclick="revealRiskAnswer('riskFb2','riskQ2','no','الإجابة: لا. تساوي الدرجة لا يعني بالضرورة تساوي طريقة التعامل؛ نراجع حجم الضرر وأهمية النظام وحساسية البيانات والضوابط المتاحة.')">إظهار الإجابة</button>
+    <div class="feedback" id="riskFb2"></div>
+   </article>
+   <article class="quiz">
+    <h3>التدريب 3: بعد المقارنة تبيّن أن خطرين متساويان فعلًا في الدرجة والسياق والأثر والضوابط. ماذا نفعل؟</h3>
+    <div class="options">
+     <label class="option"><input type="radio" name="riskQ3" value="same"><span>نسجلهما بنفس الأولوية، ونحدد التعامل حسب الموارد والسياق.</span></label>
+     <label class="option"><input type="radio" name="riskQ3" value="random"><span>نختار أولوية مختلفة عشوائيًا.</span></label>
+    </div>
+    <button class="btn btn-blue" type="button" onclick="revealRiskAnswer('riskFb3','riskQ3','same','الإجابة: نسجلهما بنفس الأولوية، ثم نحدد طريقة وتوقيت التعامل وفق الموارد والسياق.')">إظهار الإجابة</button>
+    <div class="feedback" id="riskFb3"></div>
+   </article>
+  </section>
+</section>
+
+<section class="section reveal" id="compare">
+ <div class="section-head"><div><div class="kicker">05 / نفكّر زي فريق الأمن</div><h2>مقارنة المخاطر في المدرسة</h2><p class="sub">المطلوب مش إننا نتوقع كل حاجة، لكن نرتب الاستعداد حسب الضرر والاحتمال.</p></div></div>
+ <div class="grid">
+  <article class="card pink"><div class="card-icon">🦠</div><h3>هجوم فدية على سجلات المدرسة</h3><p>ممكن يمنع الوصول لملفات مهمة ويعطل العمل. لو تأثيره واحتماليته مرتفعين، يبقى أولوية كبيرة.</p><span class="tag">تجهيز نسخ احتياطية وخطة استجابة</span></article>
+  <article class="card blue"><div class="card-icon">🔌</div><h3>انقطاع كهرباء قصير</h3><p>قد يسبب تعطّل مؤقت، لكن الأثر ممكن يكون أقل لو فيه مصدر طاقة احتياطي وخطة لاستعادة العمل.</p><span class="tag">تقييم الأثر والضوابط المتاحة</span></article>
+  <article class="card green"><div class="card-icon">🔐</div><h3>كلمة مرور ضعيفة</h3><p>لو الحساب مهم وسهل التخمين، الخطر يزيد. استخدام كلمة مرور قوية ومصادقة إضافية يقلل الخطر.</p><span class="tag">وقاية وتقليل احتمالية الاختراق</span></article>
+ </div>
+</section>
+
+<section class="section reveal" id="flashcards">
+ <div class="section-head"><div><div class="kicker">06 / مراجعة سريعة</div><h2>بطاقات: اختبر ذاكرتك</h2><p class="sub">اضغط على البطاقة عشان تشوف الإجابة.</p></div></div>
+ <div class="flashcards">
+  <div class="flash" tabindex="0"><div class="flash-inner"><div class="flash-face front">إيه الفرق بين الاحتواء وإزالة التهديد؟</div><div class="flash-face back">الاحتواء يحدّ من انتشار المشكلة، وإزالة التهديد تشيل البرمجية الخبيثة وتعالج الثغرة.</div></div></div>
+  <div class="flash" tabindex="0"><div class="flash-inner"><div class="flash-face front">ليه بنحتاج الاستعادة؟</div><div class="flash-face back">عشان نرجّع الأنظمة والخدمات للعمل الآمن، وقد نستخدم نسخة احتياطية سليمة.</div></div></div>
+  <div class="flash" tabindex="0"><div class="flash-inner"><div class="flash-face front">إزاي نرتّب المخاطر؟</div><div class="flash-face back">نقيّم التأثير والاحتمالية. الخطر العالي في الاثنين غالبًا له أولوية أعلى.</div></div></div>
+ </div>
+</section>
+
+<section class="section reveal" id="quiz">
+ <div class="section-head"><div><div class="kicker">07 / وقت التحدي</div><h2>اختبار شامل على الدرس كله 🏆</h2><p class="sub">اختار إجابة لكل سؤال، وبعدها اضغط «صحّح إجاباتي» عشان تعرف درجتك والإجابات الصحيحة.</p></div></div>
+ <div id="quizList"></div>
+ <div class="quiz-actions"><button class="btn btn-primary" id="checkQuiz">✅ صحّح إجاباتي</button><button class="btn btn-ghost" id="resetQuiz">↻ إعادة الاختبار</button><span class="mini-note" id="answered">جاوبت على 0 من 12 سؤال</span></div>
+ <div class="progress-shell"><div class="progress" id="progress"></div></div>
+ <div class="result" id="result" style="margin-top:15px"></div>
+</section>
+
+<section class="section reveal" id="wrapup">
+ <div class="section-head"><div><div class="kicker">08 / الخلاصة</div><h2>خمس حاجات لازم تخرج بيهم من الدرس</h2></div></div>
+ <div class="card">
+  <ul class="checklist">
+   <li>الحادث الأمني ممكن يهدد سرية المعلومات أو سلامتها أو توافرها.</li>
+   <li>مراحل الاستجابة: التحضير، الاكتشاف، الاحتواء، إزالة التهديد، الاستعادة، الدروس المستفادة والتحسين.</li>
+   <li>الاحتواء يمنع الانتشار، وإزالة التهديد تعالج السبب.</li>
+   <li>إدارة المخاطر تعتمد على التأثير والاحتمالية لتحديد الأولويات.</li>
+   <li>درجة الخطر في النموذج التدريبي = التأثير × الاحتمالية، والخطر الأعلى أولوية يحتاج اهتمامًا أكبر.</li>
+  </ul>
+ </div>
+</section>
+</div>
+</main>
+<footer>💙 بالتوفيق يا أبطال تانية ثانوي — افهم الفكرة، طبّقها، وبعدها اختبر نفسك.</footer>
+<button class="to-top" id="toTop" aria-label="العودة لأعلى">↑</button>
+<script>
+const questions = [
+ {q:"أي موقف من دول يُعتبر حادث أمني؟",opts:["تحديث برنامج لإضافة مميزات جديدة","تسريب بيانات شخصية لأشخاص غير مصرح لهم","تغيير خلفية سطح المكتب"],a:1,why:"تسريب البيانات يهدد سرية المعلومات، ولذلك يُعد حادثًا أمنيًا."},
+ {q:"تغيير درجة طالب بدون تصريح بيهدد إيه بشكل مباشر؟",opts:["سرية المعلومات فقط","سلامة المعلومات","توافر المعلومات فقط"],a:1,why:"سلامة المعلومات معناها إن البيانات تفضل صحيحة وما تتعدلش بدون إذن."},
+ {q:"موقع المدرسة اتعطل بسبب هجوم على الخادم. ده بيأثر على:",opts:["توافر المعلومات والخدمة","شكل الموقع فقط","سرية المعلومات فقط بالضرورة"],a:0,why:"تعطّل الخدمة يمنع المستخدمين من الوصول إليها، وده تهديد للتوافر."},
+ {q:"أي مرحلة بنجهز فيها الخطة والأدوات والنسخ الاحتياطية قبل الحادث؟",opts:["الاستعادة","التحضير","إزالة التهديد"],a:1,why:"التحضير بيكون قبل وقوع الحادث لتجهيز الفريق والأدوات والخطط."},
+ {q:"فريق الأمن عزل جهاز مصاب عن الشبكة لمنع انتشار الهجوم. دي مرحلة:",opts:["الاحتواء","الدروس المستفادة","الاستعادة"],a:0,why:"الاحتواء بيحد من انتشار المشكلة وتأثيرها."},
+ {q:"بعد العزل، الفريق حذف البرنامج الخبيث وعالج الثغرة. دي مرحلة:",opts:["الاكتشاف","إزالة التهديد","التحضير"],a:1,why:"إزالة التهديد تشمل التخلص من البرمجية الخبيثة ومعالجة الثغرة المستغلة."},
+ {q:"إرجاع النظام للعمل باستخدام نسخة احتياطية سليمة يُعتبر:",opts:["الاستعادة","الاحتواء","الاكتشاف"],a:0,why:"الاستعادة بترجع الأنظمة والخدمات للعمل الآمن والطبيعي."},
+ {q:"ليه بنعمل مراجعة بعد انتهاء الحادث؟",opts:["عشان نوقف كل الخدمات نهائيًا","عشان نوثّق الدروس ونحسّن الحماية","عشان نلغي النسخ الاحتياطية"],a:1,why:"الدروس المستفادة والتحسين بتساعد على تقليل احتمال تكرار الحادث."},
+ {q:"في تقييم المخاطر، التأثير معناه:",opts:["مدى احتمال وقوع الحدث","حجم الضرر لو الحدث حصل","عدد الموظفين فقط"],a:1,why:"التأثير هو حجم الضرر المتوقع عند وقوع الحدث."},
+ {q:"درجة الخطر في النموذج المبسط بتساوي:",opts:["التأثير + الاحتمالية","التأثير × الاحتمالية","التأثير − الاحتمالية"],a:1,why:"النموذج المستخدم في الدرس: درجة الخطر = درجة التأثير × درجة الاحتمالية."},
+ {q:"أي خطر غالبًا يحتاج أولوية أعلى؟",opts:["تأثير منخفض واحتمالية منخفضة","تأثير عالي واحتمالية عالية","مفيش تأثير واحتمالية قليلة"],a:1,why:"اجتماع التأثير العالي والاحتمالية العالية يجعل الخطر غالبًا أعلى أولوية."},
+ {q:"أثناء الاستعادة اكتشف الفريق إن التهديد لسه موجود. يعمل إيه؟",opts:["يكمل الاستعادة مهما حصل","يرجع للاحتواء وإزالة التهديد عند الحاجة","يتجاهل التنبيه"],a:1,why:"مراحل الاستجابة ممكن تتكرر أو نرجع لمرحلة سابقة لو التهديد لسه موجود."}
+];
+const quizList=document.getElementById('quizList');
+function renderQuiz(){
+ quizList.innerHTML=questions.map((item,i)=>`<article class="quiz" data-q="${i}"><h3>${i+1}. ${item.q}</h3><div class="options">${item.opts.map((op,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}"><span>${op}</span></label>`).join('')}</div><div class="feedback" id="fb${i}"></div></article>`).join('');
+ quizList.querySelectorAll('input').forEach(input=>input.addEventListener('change',updateAnswered));
+ document.getElementById('result').style.display='none';
+ document.getElementById('progress').style.width='0%';
+ updateAnswered();
+}
+function updateAnswered(){
+ const count=questions.filter((_,i)=>quizList.querySelector(`input[name="q${i}"]:checked`)).length;
+ document.getElementById('answered').textContent=`جاوبت على ${count} من ${questions.length} سؤال`;
+ document.getElementById('progress').style.width=(count/questions.length*100)+'%';
+}
+document.getElementById('checkQuiz').addEventListener('click',()=>{
+ let score=0,answered=0;
+ questions.forEach((item,i)=>{
+  const selected=quizList.querySelector(`input[name="q${i}"]:checked`);
+  const card=quizList.querySelector(`[data-q="${i}"]`);
+  const feedback=document.getElementById('fb'+i);
+  card.querySelectorAll('.option').forEach((el,j)=>{el.classList.remove('correct','wrong');if(j===item.a)el.classList.add('correct');});
+  if(selected){answered++;if(Number(selected.value)===item.a)score++;else card.querySelectorAll('.option')[Number(selected.value)].classList.add('wrong');}
+  feedback.className='feedback show '+(selected&&Number(selected.value)===item.a?'ok':'no');
+  feedback.textContent=(selected&&Number(selected.value)===item.a?'إجابة صحيحة! ':'الإجابة الصحيحة: ')+item.opts[item.a]+' — '+item.why;
+ });
+ const result=document.getElementById('result');
+ const pct=Math.round(score/questions.length*100);
+ result.style.display='block';
+ result.innerHTML=`نتيجتك: ${score} من ${questions.length} (${pct}٪) ${pct>=85?'🌟 ممتاز! فهمك للدرس قوي.':pct>=65?'👏 شغل جميل! راجع الأسئلة اللي غلطت فيها.':'💪 كمّل مراجعة مراحل الاستجابة وعوامل الخطر وجرب تاني.'}<div style="font-size:13px;font-weight:600;margin-top:5px">جاوبت على ${answered} سؤال. الإجابات الصحيحة موضحة باللون الأخضر.</div>`;
+ result.scrollIntoView({behavior:'smooth',block:'center'});
+});
+document.getElementById('resetQuiz').addEventListener('click',()=>{renderQuiz();document.getElementById('quiz').scrollIntoView({behavior:'smooth'});});
+renderQuiz();
+const warmupReveal=document.getElementById('warmupReveal');
+if(warmupReveal){warmupReveal.addEventListener('click',()=>{const answer=document.getElementById('warmupAnswer');const willShow=answer.hidden;answer.hidden=!willShow;warmupReveal.textContent=willShow?'إخفاء الإجابة':'اعرض طريقة التفكير المقترحة';warmupReveal.setAttribute('aria-expanded',String(willShow));});}
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));
+ document.querySelectorAll('.tabcontent').forEach(c=>c.classList.toggle('active',c.id===btn.dataset.tab));
+}));
+const impact=document.getElementById('impact'), likelihood=document.getElementById('likelihood');
+function updateRisk(){
+ const a=+impact.value,b=+likelihood.value,score=a*b;
+ document.getElementById('impactVal').textContent=a;document.getElementById('likelihoodVal').textContent=b;document.getElementById('score').textContent=score;
+ const level=document.getElementById('level'),explain=document.getElementById('scoreExplain');
+ if(score>=6){level.textContent='أولوية عالية';level.style.background='#ffe2e2';level.style.color='#a72f3b';explain.textContent='التأثير أو الاحتمالية مرتفعان معًا بدرجة تستدعي اهتمامًا سريعًا.'}
+ else if(score>=3){level.textContent='أولوية متوسطة';level.style.background='#fff0c7';level.style.color='#805800';explain.textContent='راجع وسائل الحماية المتاحة وحدد إجراءً يقلل التأثير أو الاحتمالية.'}
+ else{level.textContent='أولوية أقل';level.style.background='#dff8ed';level.style.color='#176c4e';explain.textContent='الخطر أقل وفق الدرجات التدريبية، لكنه يظل محتاج متابعة حسب السياق.'}
+}
+impact.addEventListener('input',updateRisk);likelihood.addEventListener('input',updateRisk);updateRisk();
+document.querySelectorAll('.flash').forEach(card=>{card.addEventListener('click',()=>card.classList.toggle('flipped'));card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.classList.toggle('flipped')}})});
+function revealRiskAnswer(feedbackId, groupName, correctValue, explanation){
+ const feedback=document.getElementById(feedbackId);
+ const selected=document.querySelector(`input[name="${groupName}"]:checked`);
+ feedback.className='feedback show '+(selected && selected.value===correctValue?'ok':'no');
+ feedback.textContent=(selected && selected.value===correctValue?'إجابة صحيحة! ':'الإجابة الصحيحة: ')+explanation;
+}
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const toTop=document.getElementById('toTop');window.addEventListener('scroll',()=>{toTop.style.display=window.scrollY>450?'block':'none'});toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>
